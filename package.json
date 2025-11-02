@@ -1,0 +1,36 @@
+{
+  "name": "ashton",
+  "description": "A custom Ghost theme",
+  "version": "1.0.0",
+  "keywords": [
+    "ghost-theme"
+  ],
+  "engines": {},
+  "card_assets": {
+    "exclude": [
+      "bookmark",
+      "gallery",
+      "markdown",
+      "header",
+      "audio",
+      "video",
+      "product"
+    ]
+  },
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./assets/css/styles.css -o ./assets/css/output.css --watch"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Daniel Mwangila",
+    "email": "partnerships@insipiregrowth.com"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.16"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.16"
+  }
+}

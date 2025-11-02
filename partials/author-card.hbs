@@ -1,0 +1,12 @@
+<div class="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition">
+    {{#if profile_image}}
+    <img src="{{profile_image}}" alt="{{name}}" class="w-full h-64 object-cover">
+    {{/if}}
+    {{^if profile_image}}
+    <img src="{{asset "images/default_avatar_612.jpg"}}" alt="default" class="w-full h-64 object-cover">
+    {{/if}}
+    <div class="p-4">
+        <h3 class="font-bold text-lg">{{name}}</h3>
+        <p class="text-sm text-gray-600 mt-2">{{bio}}</p>
+    </div>
+</div>
