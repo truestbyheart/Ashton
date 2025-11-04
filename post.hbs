@@ -98,15 +98,8 @@
                         {{/get}}
                     </div>
 
-                    <div class="toc toc-handled" style="--toc--scroll-progress: 30px; --toc--link-height: 30;">
-                        <button class="toc-button button button-sm button-icon button-transparent button-rounded" aria-expanded="false" aria-label="Collapse table of contents">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <line x1="1.25" y1="4.25" x2="10.75" y2="4.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
-                                <line x1="3.25" y1="8.25" x2="12.75" y2="8.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
-                                <line x1="5.25" y1="12.25" x2="14.75" y2="12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
-                            </svg>
-                        </button>
-                        <div class="toc-title">
+                    <div class="toc p-4">
+                        <div class="flex flex-row gap-2 items-center text-bold font-semibold mb-2">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <line x1="1.25" y1="4.25" x2="10.75" y2="4.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
                                 <line x1="3.25" y1="8.25" x2="12.75" y2="8.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
@@ -114,7 +107,7 @@
                             </svg>
                             On this page
                         </div>
-                        <ul></ul>
+                        <div class="toc-list"></div>
                     </div>
 
                     <div class="p-6 bg-gray-50 rounded-lg text-center">
@@ -195,11 +188,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.min.js"></script>
     <script>
         tocbot.init({
-            tocSelector: '.toc ul',
+            tocSelector: '.toc-list',
             contentSelector: '.post-content',
             headingSelector: 'h1, h2, h3, h4, h5, h6',
-            collapseDepth: 6,
-            scrollSmoothOffset: -100,
+            collapseDepth: 6
         });
     </script>
     {{ghost_footer}}
