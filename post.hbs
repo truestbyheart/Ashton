@@ -5,22 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{meta_title}}</title>
     <link rel="stylesheet" href="{{asset "css/output.css"}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    {{!-- <style>
-        /* A little extra style for the post content if not using @tailwindcss/typography */
-        .post-content h3 {
-            @apply text-2xl font-bold mt-10 mb-4;
-        }
-        .post-content p {
-            @apply mb-6;
-        }
-        .post-content blockquote {
-            @apply my-10 border-l-4 border-gray-800 pl-6 italic text-2xl font-serif text-gray-900;
-        }
-        .post-content blockquote cite {
-            @apply block not-italic text-base text-gray-600 mt-2;
-        }
-    </style> --}}
     {{ghost_head}}
 </head>
 <body class="bg-white text-gray-800 font-sans">
@@ -31,107 +17,48 @@
 
     {{> head}}
 
-
     <div class="container mx-auto px-4 mt-10">
-        <div class="flex flex-row mb-6">
-            <h1 class="text-5xl font-bold my-2" style="font-size: 1.2345rem;">{{title}}</h1>
-            <div class="flex items-center ml-6">
-              {{#get "authors" filter="slug:{{primary_author.slug}}" limit="1"}}
-                {{#foreach authors}}
-                    {{#if profile_image}}
-                        <img src="{{profile_image}}" alt="{{name}}" class="w-12 h-12 rounded-full mr-4">
-                    {{else}}
-                        <img src="https://placehold.co/100x100/4a5568/e2e8f0" alt="Author" class="w-12 h-12 rounded-full mr-4">
-                    {{/if}}
-                    <div class="flex flex-col justify-center">
-                        <span class="font-bold text-lg">{{name}}</span>
-                        <span class="text-sm text-gray-500">{{date published_at format="MMM D, YYYY"}} • {{reading_time}}</span>
+        <header class="flex flex-col">
+            <div class="mb-6 lg:order-1 sm:mb-0 max-sm:mb-0 sm:order-2 max-sm:order-2 sm:mt-4 max-sm:mt-4">
+                <div class="flex flex-row">
+                    {{#get "authors" filter="slug:{{primary_author.slug}}" limit="2"}}
+                        {{#foreach authors}}
+                            {{#if profile_image}}
+                                <img src="{{profile_image}}" alt="{{name}}" class="w-16 h-16 rounded-full mb-4">
+                            {{else}}
+                                <img src="https://placehold.co/100x100/4a5568/e2e8f0" alt="Author" class="w-16 h-16 rounded-full mb-4">
+                            {{/if}}
+                        {{/foreach}}
+                    {{/get}}
+                    <div class="ml-6">
+                        <h1 class="text-5xl font-bold my-2" style="font-size: 1.2345rem;">{{title}}</h1>
+                        <div class="flex flex-row gap-1 text-gray-600 mt-2 text-sm">
+                        {{#get "authors" filter="slug:{{primary_author.slug}}"}}
+                            by
+                            {{#foreach authors}}
+                                <div class="">
+                                    <span class="font-light">{{name}} • </span>
+                                </div>
+                            {{/foreach}}
+                            <span class="text-sm text-gray-500">{{date published_at format="MMM D, YYYY"}} • {{reading_time}}</span>
+                        {{/get}}
+                        </div>
                     </div>
-                {{/foreach}}
-              {{/get}}
-        </div>
-        </div>
-        
-        <div class="w-full">
-            {{#if feature_image}}
-                <img src="{{feature_image}}" alt="{{title}}" class="w-full h-[500px] rounded-2xl object-cover">
-            {{else}}
-                    <img src="https://placehold.co/1000x600/1a1a1a/404040" alt="Placeholder Image" class="w-full h-auto">
-            {{/if}}
-        </div>
-
-        <main class="max-w-3xl mx-auto relative">
-            <div class="absolute top-0 hidden lg:block" style="left: -8rem; width: 6rem;">
-                <div class="sticky top-24 flex flex-col items-center space-y-2 text-xs uppercase text-gray-500">
-                    <span class="font-bold text-gray-800">Share</span>
-                    <a href="#" class="hover:text-gray-800">Facebook</a>
-                    <a href="#" class="hover:text-gray-800">Twitter</a>
-                    <a href="#" class="hover:text-gray-800">Pinterest</a>
                 </div>
             </div>
 
-            <aside class="absolute top-0 hidden lg:block" style="right: -18rem; width: 16rem;">
-                <div class="sticky top-24 space-y-8">
+            <div class="lg:w-full lg:h-auto sm:h-[200px] max-sm:h-[100px] overflow-hidden rounded-2xl sm:order-1 max-sm:order-1 ">
+                {{#if feature_image}}
+                    <img src="{{feature_image}}" alt="{{title}}" class="w-full h-[500px] rounded-2xl object-cover">
+                {{else}}
+                        <img src="https://placehold.co/1000x600/1a1a1a/404040" alt="Placeholder Image" class="w-full h-auto">
+                {{/if}}
+            </div>
+        </header>
 
-                    <div class="p-6 bg-gray-50 rounded-lg text-center">
-                        {{#author}}
-                            {{#if profile_image}}
-                                <img src="{{profile_image}}" alt="{{name}}" class="w-20 h-20 rounded-full mx-auto">
-                            {{else}}
-                                <img src="https://placehold.co/100x100/4a5568/e2e8f0" alt="Author" class="w-20 h-20 rounded-full mx-auto">
-                            {{/if}}
-                            <h4 class="text-xl font-bold mt-4">{{name}}</h4>
-                            <p class="text-gray-600 mt-2 text-sm">{{bio}}</p>
-                            <div class="flex justify-center space-x-4 mt-4 text-gray-500">
-                                <a href="#" class="hover:text-gray-800">Tw</a>
-                                <a href="#" class="hover:text-gray-800">In</a>
-                                <a href="#" class="hover:text-gray-800">Fb</a>
-                            </div>
-                        {{/author}}
-
-                        {{! Fallback author box if not in Ghost context }}
-                        {{^author}}
-                            <img src="https://placehold.co/100x100/4a5568/e2e8f0" alt="Author" class="w-20 h-20 rounded-full mx-auto">
-                            <h4 class="text-xl font-bold mt-4">Olugbenga Reindorf</h4>
-                            <p class="text-gray-600 mt-2 text-sm">Photographer & Digital Artist based in London. Capturing stories, one frame at a time.</p>
-                            <div class="flex justify-center space-x-4 mt-4 text-gray-500">
-                                <a href="#" class="hover:text-gray-800">Tw</a>
-                                <a href="#" class="hover:text-gray-800">In</a>
-                                <a href="#" class="hover:text-gray-800">Fb</a>
-                            </div>
-                        {{/author}}
-                    </div>
-
-                    <ol data-toc="div.post-content" data-toc-headings="h2,h3,h4"></ol>
-
-                    <div class="p-6 bg-gray-50 rounded-lg text-center">
-                        <h4 class="font-bold text-lg">Newsletter</h4>
-                        <p class="text-gray-600 mt-2 text-sm">Subscribe to get my latest posts and updates.</p>
-                        <form action="#" method="post" class="mt-4">
-                            <input type="email" name="email" placeholder="Your email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800" required>
-                            <button type="submit" class="mt-3 w-full bg-black text-white py-2 text-sm uppercase rounded-md hover:bg-gray-800">Subscribe</button>
-                        </form>
-                    </div>
-
-                </div>
-            </aside>
-
-            <article>
-                <header class="my-8 text-center">
-                    <p class="text-sm uppercase text-gray-500">
-                        {{#primary_tag}}
-                            <a href="{{url}}">{{name}}</a> / 
-                        {{/primary_tag}}
-                        <time datetime="{{date format='YYYY-MM-DD'}}">{{date format="DD.MM.YYYY"}}</time>
-                    </p>
-                    <div class="text-gray-600 text-sm mt-4">
-                        <p>Model: Ade @ First Model Management</p>
-                        <p>Stylist: Elvija Vitola</p>
-                        <p>MUA: Coco</p>
-                    </div>
-                </header>
-
-                <section class="post-content text-lg leading-relaxed text-gray-700">
+        <main class="grid grid-cols-4 gap-3 mt-5 relative">
+            <article class="lg:col-span-3 sm:col-span-4 max-sm:col-span-4">
+                <section class="post-content text-lg leading-relaxed text-gray-700 mt-6">
                     {{content}}
                 </section>
 
@@ -147,12 +74,63 @@
                     </div>
                     {{/if}}
                 </footer>
-
             </article>
+            <aside class="lg:col-span-1 lg:block  sm:hidden max-sm:hidden">
+                <div class="sticky top-24 space-y-8">
+                    <div class="p-6 bg-gray-50 rounded-lg text-center">
+                        {{#get "authors" filter="slug:{{primary_author.slug}}" limit="1"}}
+                        {{#foreach authors}}
+                            <div class="flex justify-center">
+                                {{#if profile_image}}
+                                    <img src="{{profile_image}}" alt="{{name}}" class="w-16 h-16 rounded-full mb-4">
+                                {{else}}
+                                    <img src="{{ asset "images/default_avatar_612.jpg"}}" alt="Author" class="w-16 h-16 rounded-full mb-4">
+                                {{/if}}
+                            </div>
+                            <h4 class="text-xl font-bold mt-4">{{name}}</h4>
+                            <p class="text-gray-600 mt-2 text-sm">{{bio}}</p>
+                            <div class="flex justify-center space-x-4 mt-4 text-gray-500">
+                                <a href="#" class="hover:text-gray-800">Tw</a>
+                                <a href="#" class="hover:text-gray-800">In</a>
+                                <a href="#" class="hover:text-gray-800">Fb</a>
+                            </div>
+                        {{/foreach}}
+                        {{/get}}
+                    </div>
+
+                    <div class="toc toc-handled" style="--toc--scroll-progress: 30px; --toc--link-height: 30;">
+                        <button class="toc-button button button-sm button-icon button-transparent button-rounded" aria-expanded="false" aria-label="Collapse table of contents">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="1.25" y1="4.25" x2="10.75" y2="4.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
+                                <line x1="3.25" y1="8.25" x2="12.75" y2="8.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
+                                <line x1="5.25" y1="12.25" x2="14.75" y2="12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
+                            </svg>
+                        </button>
+                        <div class="toc-title">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <line x1="1.25" y1="4.25" x2="10.75" y2="4.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
+                                <line x1="3.25" y1="8.25" x2="12.75" y2="8.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
+                                <line x1="5.25" y1="12.25" x2="14.75" y2="12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></line>
+                            </svg>
+                            On this page
+                        </div>
+                        <ul></ul>
+                    </div>
+
+                    <div class="p-6 bg-gray-50 rounded-lg text-center">
+                        <h4 class="font-bold text-lg">Newsletter</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Subscribe to get my latest posts and updates.</p>
+                        <form action="#" method="post" class="mt-4">
+                            <input type="email" name="email" placeholder="Your email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800" required>
+                            <button type="submit" class="mt-3 w-full bg-black text-white py-2 text-sm uppercase rounded-md hover:bg-gray-800">Subscribe</button>
+                        </form>
+                    </div>
+
+                </div>
+            </aside>
         </main>
 
     </div>
-    
     {{/post}}
 
     <a href="#" class="fixed bottom-10 right-10 hidden lg:block p-3 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-600 transition-colors z-40">
@@ -166,7 +144,6 @@
             <h2 class="text-3xl font-bold text-center mb-12">More Posts</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                
                 {{! This is a Ghost helper to fetch 4 other posts }}
                 {{#get "posts" filter="id:-{{post.id}}" limit="4" include="tags,authors"}}
                     {{#foreach posts}}
@@ -215,8 +192,16 @@
     </section>
 
     <script src="{{ asset "vendors/js/jquery-3.7.1.min.js" }}"></script>
-    <script src="{{ asset "vendors/js/jquery.toc.min.js" }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.32.2/tocbot.min.js"></script>
+    <script>
+        tocbot.init({
+            tocSelector: '.toc ul',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5, h6',
+            collapseDepth: 6,
+            scrollSmoothOffset: -100,
+        });
+    </script>
     {{ghost_footer}}
 </body>
 </html>
