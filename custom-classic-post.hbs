@@ -1,0 +1,56 @@
+{{!< default}} {{!-- The tag above means: insert everything in this file into the {body} tag of the default.hbs template
+    --}} {{#post}} {{!-- add navigation partial --}} {{> navigation}}
+    <div class="container mx-auto px-4 mt-10">
+        <header class="grid grid-cols-4 gap-1">
+            <div class="lg:col-span-4 sm:col-span-4 max-sm:col-span-4">
+                <div class="flex flex-col gap-1">
+                    <h1 class="text-3xl font-bold">{{title}}</h1>
+                    <p class="text-lg mb-6">{{excerpt}}</p>
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        {{#foreach tags}}
+                        <a href="{{url}}"
+                            class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-lg text-sm hover:bg-gray-200">{{name}}</a>
+                        {{/foreach}}
+                    </div>
+                    <hr class="mb-4 text-gray-300" />
+                    <div class="flex items-center gap-4 text-sm opacity-90">
+                        <div class="flex -space-x-2">
+                            {{#foreach authors limit="3"}}
+                            <img src="{{profile_image}}" alt="{{name}}" class="w-[60px] h-[60px] rounded-full border-2 border-white">
+                            {{/foreach}}
+                        </div>
+                        <div class="flex flex-col text-gray-500">
+                            <span>
+                                <span class="font-medium">By </span>
+                                {{#foreach authors limit="1"}}
+                                    <a class="font-bold text-black" href="{{url}}">{{name}}</a>
+                                {{/foreach}}
+                            </span>
+                            <span>{{date published_at format="MMM D, YYYY"}} • {{reading_time}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-4 sm:col-span-4 max-sm:col-span-4 w-[98%] mt-6">
+                {{#if feature_image}}
+                <img class="rounded-lg shadow-lg w-full" src="{{feature_image}}" alt="{{title}}">
+                {{/if}}
+            </div>
+        </header>
+        <div class="grid grid-cols-4 gap-3 mt-10 relative">
+            <section class="lg:col-span-3 sm:col-span-4 max-sm:col-span-4">
+                <article class="post-content">
+                    {{{content}}}
+                </article>
+                {{> "article-tags-standard"}}
+
+            </section>
+            <aside class="lg:col-span-1 lg:block  sm:hidden max-sm:hidden">
+                {{> "post-aside-standard"}}
+            </aside>
+        </div>
+
+    </div>
+
+    {{/post}}
+    {{> "recent-posts-standard"}}

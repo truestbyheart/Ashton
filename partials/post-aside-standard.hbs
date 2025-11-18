@@ -1,52 +1,50 @@
-<aside>
-    <div class="sticky top-24 space-y-8">
-        <div class="p-6 bg-gray-50 rounded-lg text-center">
-            {{#get "authors" filter="slug:{{primary_author.slug}}" limit="1"}}
-            {{#foreach authors}}
-            <div class="flex justify-center">
-                {{#if profile_image}}
-                <img src="{{profile_image}}" alt="{{name}}" class="w-16 h-16 rounded-full mb-4">
-                {{else}}
-                <img src="{{ asset " images/default_avatar_612.jpg"}}" alt="Author" class="w-16 h-16 rounded-full mb-4">
-                {{/if}}
-            </div>
-            <h4 class="text-xl font-bold mt-4">{{name}}</h4>
-            <p class="text-gray-600 mt-2 text-sm">{{bio}}</p>
-            <div class="flex justify-center space-x-4 mt-4 text-gray-500">
-                <a href="#" class="hover:text-gray-800">Tw</a>
-                <a href="#" class="hover:text-gray-800">In</a>
-                <a href="#" class="hover:text-gray-800">Fb</a>
-            </div>
-            {{/foreach}}
-            {{/get}}
+<div class="sticky top-24 space-y-8">
+    <div class="p-6 bg-gray-50 rounded-lg text-center">
+        {{#get "authors" filter="slug:{{primary_author.slug}}" limit="1"}}
+        {{#foreach authors}}
+        <div class="flex justify-center">
+            {{#if profile_image}}
+            <img src="{{profile_image}}" alt="{{name}}" class="w-16 h-16 rounded-full mb-4">
+            {{else}}
+            <img src="{{ asset " images/default_avatar_612.jpg"}}" alt="Author" class="w-16 h-16 rounded-full mb-4">
+            {{/if}}
         </div>
-
-        <div class="toc p-4">
-            <div class="flex flex-row gap-2 items-center text-bold font-semibold mb-2">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="1.25" y1="4.25" x2="10.75" y2="4.25" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round"></line>
-                    <line x1="3.25" y1="8.25" x2="12.75" y2="8.25" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round"></line>
-                    <line x1="5.25" y1="12.25" x2="14.75" y2="12.25" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round"></line>
-                </svg>
-                On this page
-            </div>
-            <div class="toc-list"></div>
+        <h4 class="text-xl font-bold mt-4">{{name}}</h4>
+        <p class="text-gray-600 mt-2 text-sm">{{bio}}</p>
+        <div class="flex justify-center space-x-4 mt-4 text-gray-500">
+            <a href="#" class="hover:text-gray-800">Tw</a>
+            <a href="#" class="hover:text-gray-800">In</a>
+            <a href="#" class="hover:text-gray-800">Fb</a>
         </div>
-
-        <div class="p-6 bg-gray-50 rounded-lg text-center">
-            <h4 class="font-bold text-lg">Newsletter</h4>
-            <p class="text-gray-600 mt-2 text-sm">Subscribe to get my latest posts and updates.</p>
-            <form action="#" method="post" class="mt-4">
-                <input type="email" name="email" placeholder="Your email"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
-                    required>
-                <button type="submit"
-                    class="mt-3 w-full bg-black text-white py-2 text-sm uppercase rounded-md hover:bg-gray-800">Subscribe</button>
-            </form>
-        </div>
-
+        {{/foreach}}
+        {{/get}}
     </div>
-</aside>
+
+    <div class="toc p-4">
+        <div class="flex flex-row gap-2 items-center text-bold font-semibold mb-2">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="1.25" y1="4.25" x2="10.75" y2="4.25" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round"></line>
+                <line x1="3.25" y1="8.25" x2="12.75" y2="8.25" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round"></line>
+                <line x1="5.25" y1="12.25" x2="14.75" y2="12.25" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round"></line>
+            </svg>
+            On this page
+        </div>
+        <div class="toc-list"></div>
+    </div>
+
+    <div class="p-6 bg-gray-50 rounded-lg text-center">
+        <h4 class="font-bold text-lg">Newsletter</h4>
+        <p class="text-gray-600 mt-2 text-sm">Subscribe to get my latest posts and updates.</p>
+        <form action="#" method="post" class="mt-4">
+            <input type="email" name="email" placeholder="Your email"
+                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-800"
+                required>
+            <button type="submit"
+                class="mt-3 w-full bg-black text-white py-2 text-sm uppercase rounded-md hover:bg-gray-800">Subscribe</button>
+        </form>
+    </div>
+
+</div>
