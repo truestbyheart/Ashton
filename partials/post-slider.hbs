@@ -1,0 +1,47 @@
+<div class="w-full h-182 rounded-2xl mx-auto mt-8 px-4 lg:block md:hidden max-sm:hidden">
+    {{^is "paged"}}
+    {{#get "posts" limit="4" filter="featured:true" include="tags,authors"}} {{! Fetch up to 4 featured posts }}
+    {{#if posts}}
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            {{#foreach posts}}
+            <a href="{{url}}">
+                <section class="swiper-slide rounded-2xl">
+                    <div class="absolute rounded-2xl inset-0 bg-black/50 z-10"></div>
+                    <img src="{{feature_image}}" alt="{{title}}" class="w-full h-full rounded-2xl object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 z-20 text-white text-center">
+                        <div class="flex flex-row justify-center items-center">
+                            {{#if tags limit="4"}}
+                            <div class="text-sm opacity-80 mb-2 capitalize">
+                                {{#foreach tags}}<span>{{name}}</span>{{#unless @last}} • {{/unless}}{{/foreach}}
+                            </div>
+                            {{/if}}
+                        </div>
+                        <h2 class="text-sm md:text-2xl font-bold leading-tight mb-4">{{title}}</h2>
+                        <div class="flex items-center justify-center">
+                            <p class="text-lg md:text-xl max-w-3xl mb-6">{{excerpt}}</p>
+                        </div>
+                        <div class="flex items-center justify-center gap-4 text-sm opacity-90">
+                            <div class="flex -space-x-2">
+                                {{#foreach authors limit="3"}}
+                                <img src="{{profile_image}}" alt="{{name}}"
+                                    class="w-8 h-8 rounded-full border-2 border-white">
+                                {{/foreach}}
+                            </div>
+                            <span>
+                                {{authors limit="1"}} • {{date published_at format="MMM D, YYYY"}} • {{reading_time}}
+                            </span>
+                        </div>
+                    </div>
+                </section>
+            </a>
+            {{/foreach}}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+    {{/if}}
+    {{/get}}
+    {{/is}}
+</div>

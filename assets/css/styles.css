@@ -55,37 +55,95 @@
 
 /* A little extra style for the post content if not using @tailwindcss/typography */
 .post-content h3 {
-    @apply text-2xl font-bold mt-10 mb-4;
+  @apply text-2xl font-bold mt-10 mb-4;
 }
 .post-content p {
-    @apply mb-6;
+  @apply mb-6;
 }
 .post-content blockquote {
-    @apply my-10 border-l-4 border-gray-800 pl-6 italic text-2xl font-serif text-gray-900;
+  @apply my-10 border-l-4 border-gray-800 pl-6 italic text-2xl font-serif text-gray-900;
 }
 .post-content blockquote cite {
-    @apply block not-italic text-base text-gray-600 mt-2;
+  @apply block not-italic text-base text-gray-600 mt-2;
 }
 
 /* Table of Contents Styles */
 .toc .toc-list li {
-    @apply text-black font-light mb-2;
+  @apply text-black font-light mb-2;
 }
 
 .toc-list .is-active-link::before {
-    @apply bg-black;
+  @apply bg-black;
 }
 
 /*navigation menu styles */
 .swiper-button-next,
 .swiper-button-prev {
-    @apply text-white bg-gray-800/20 hover:bg-gray-800/40 h-[100px] w-[100px] rounded-full p-2;
+  color: white !important;
 }
 
 .swiper-pagination-bullet {
-    @apply bg-gray-400/50;
+  background: white !important;
 }
 
-.swiper-pagination-bullet-active {
-    @apply bg-gray-800/50;
+/* Gallery Styles */
+.kg-gallery-container {
+  @apply my-6;
+}
+
+.kg-gallery-row {
+  @apply flex gap-4 justify-center;
+}
+
+.kg-gallery-image {
+  @apply flex-1 flex items-center justify-center overflow-hidden rounded-lg bg-gray-100;
+}
+
+.kg-gallery-image img {
+  @apply w-full h-full object-cover;
+}
+
+/* Bookmark Card Styles */
+.kg-bookmark-card {
+  @apply my-6 rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow;
+}
+
+.kg-bookmark-container {
+  @apply flex;
+}
+
+.kg-bookmark-content {
+  @apply flex-1 p-4 flex flex-col justify-between;
+}
+
+.kg-bookmark-title {
+  @apply text-lg font-semibold text-gray-900 mb-2 line-clamp-2;
+}
+
+.kg-bookmark-description {
+  @apply text-sm text-gray-600 mb-3 line-clamp-2;
+}
+
+.kg-bookmark-metadata {
+  @apply flex items-center gap-2 text-xs text-gray-500;
+}
+
+.kg-bookmark-icon {
+  @apply w-4 h-4 shrink-0;
+}
+
+.kg-bookmark-author {
+  @apply flex items-center gap-1;
+}
+
+.kg-bookmark-author::after {
+  @apply content-['•'] mx-1;
+}
+
+.kg-bookmark-publisher {
+  @apply shrink-0;
+}
+
+.kg-bookmark-thumbnail {
+  @apply w-32 h-32 shrink-0 object-cover bg-gray-100;
 }

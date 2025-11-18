@@ -32,5 +32,8 @@
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.16"
+  },
+  "config": {
+    "posts_per_page": 12
   }
 }

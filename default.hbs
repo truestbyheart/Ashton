@@ -1,42 +1,57 @@
 <!DOCTYPE html>
 <html lang="{{@site.locale}}">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{meta_title}}</title>
-    <link rel="stylesheet" href="{{asset "css/output.css"}}">
+    <link rel="stylesheet" href="{{asset 'css/output.css'}}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{asset 'vendors/css/swiper-bundle.min.css'}}" />
+    <link rel="stylesheet" href="{{asset 'vendors/css/tocbot.min.css'}}" />
+    <script defer src="{{asset 'vendors/js/alpinejs.min.js'}}"></script>
     {{ghost_head}}
 </head>
 
 <body class="font-sans bg-white text-gray-800">
-    {{!-- {{> head}} --}}
     {{{body}}}
-    {{!-- {{> footer}} --}}
-    <script src="{{ asset "vendors/js/jquery-3.7.1.min.js" }}"></script>
-    <script src="{{ asset "vendors/js/jquery.toc.min.js" }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Jquery -->
+    <script src="{{asset 'vendors/js/jquery-3.7.1.min.js'}}"></script>
+    <!-- Tocbot JS -->
+    <script src="{{asset 'vendors/js/tocbot.min.js'}}"></script>
+    <script>
+        tocbot.init({
+            tocSelector: '.toc-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5, h6',
+            collapseDepth: 6
+        });
+    </script>
+
+
+    <!-- Swiper JS -->
+    <script src="{{asset 'vendors/js/swiper-bundle.min.js'}}"></script>
     <script>
         const swiper = new Swiper('.swiper', {
             // Optional parameters
             {{!-- loop: true,
             autoplay: {
-                delay: 5000,
-            }, --}}
-            // If we need pagination
-            pagination: {
-                el: '.swiper-pagination',
+            delay: 5000,
+        }, --}}
+        // If we need pagination
+        pagination: {
+            el: '.swiper-pagination',
                 clickable: true,
             },
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
         });
     </script>
-    {{ghost_footer}}
+    {{ghost_foot}}
 </body>
 
 </html>
