@@ -1,0 +1,56 @@
+<section class="mt-20 py-20 border-t border-gray-200">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">More Posts</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {{! This is a Ghost helper to fetch 4 other posts }}
+            {{#get "posts" filter="id:-{{post.id}}" limit="4" include="tags,authors"}}
+            {{#foreach posts}}
+            <div>
+                <a href="{{url}}">
+                    {{#if feature_image}}
+                    <img src="{{feature_image}}" alt="{{title}}" class="w-full h-64 object-cover">
+                    {{else}}
+                    <img src="https://placehold.co/400x300/e5e7eb/9ca3af" alt="Placeholder"
+                        class="w-full h-64 object-cover">
+                    {{/if}}
+                </a>
+                <h3 class="font-bold text-lg mt-4"><a href="{{url}}">{{title}}</a></h3>
+                {{#primary_tag}}
+                <p class="text-sm text-gray-500 uppercase mt-1">{{name}}</p>
+                {{/primary_tag}}
+            </div>
+            {{/foreach}}
+            {{/get}}
+
+            {{! Fallback static cards if not using Ghost }}
+            {{^get "posts" limit="4"}}
+            <div>
+                <a href="#"><img src="https://placehold.co/400x300/d1fae5/10b981" alt="Related post 1"
+                        class="w-full h-64 object-cover"></a>
+                <h3 class="font-bold text-lg mt-4">Post Title One</h3>
+                <p class="text-sm text-gray-500 uppercase mt-1">Category</p>
+            </div>
+            <div>
+                <a href="#"><img src="https://placehold.co/400x300/cffafe/06b6d4" alt="Related post 2"
+                        class="w-full h-64 object-cover"></a>
+                <h3 class="font-bold text-lg mt-4">Post Title Two</h3>
+                <p class="text-sm text-gray-500 uppercase mt-1">Category</p>
+            </div>
+            <div>
+                <a href="#"><img src="https://placehold.co/400x3A00/e0e7ff/6366f1" alt="Related post 3"
+                        class="w-full h-64 object-cover"></a>
+                <h3 class="font-bold text-lg mt-4">Post Title Three</h3>
+                <p class="text-sm text-gray-500 uppercase mt-1">Category</p>
+            </div>
+            <div>
+                <a href="#"><img src="https://placehold.co/400x300/f3e8ff/a855f7" alt="Related post 4"
+                        class="w-full h-64 object-cover"></a>
+                <h3 class="font-bold text-lg mt-4">Post Title Four</h3>
+                <p class="text-sm text-gray-500 uppercase mt-1">Category</p>
+            </div>
+            {{/get}}
+
+        </div>
+    </div>
+</section>
