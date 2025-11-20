@@ -1,66 +1,11 @@
-<!DOCTYPE html>
-<html lang="{{@site.locale}}">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{meta_title}}</title>
-    <link rel="stylesheet" href="{{asset "css/output.css"}}">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-{{!-- {{!< default}} --}}
-
-
-<body class="font-sans bg-white text-gray-800">
-
-    {{> head }}
-
+{{!< default}} {{> navigation }}
     <!-- Hero Post Banner -->
-    <div class="w-[1692px] height-[500px] rounded-2xl mx-auto mt-8">
-    {{^is "paged"}}
-    {{#get "posts" limit="4" filter="featured:true"}} {{! Fetch up to 4 featured posts }}
-    {{#if posts}}
-    <div class="swiper">
-        <div class="swiper-wrapper w-full h-full">
-            {{#foreach posts}}
-                <section class="swiper-slide rounded-2xl">
-                    <div class="absolute inset-0 bg-black/50 z-10"></div>
-                    <img src="{{feature_image}}" alt="{{title}}"
-                        class="w-full h-[400px] rounded-2xl object-cover">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 z-20 text-white text-center">
-                        <div class="text-sm opacity-80 mb-2">
-                            {{#foreach tags}}<span>{{name}}</span>{{#unless @last}} • {{/unless}}{{/foreach}}
-                        </div>
-                        <h2 class="text-3xl md:text-5xl font-bold leading-tight mb-4">{{title}}</h2>
-                        <div class="flex items-center justify-center">
-                            <p class="text-lg md:text-xl max-w-3xl mb-6">{{excerpt}}</p>
-                        </div>
-                        <div class="flex items-center justify-center gap-4 text-sm opacity-90">
-                            <div class="flex -space-x-2">
-                                {{#foreach authors}}
-                                    <img src="{{profile_image}}" alt="{{name}}" class="w-8 h-8 rounded-full border-2 border-white">
-                                {{/foreach}}
-                            </div>
-                            <span>{{primary_author.name}} • {{date published_at format="MMM
-                                D, YYYY"}} • {{reading_time}}</span>
-                        </div>
-                    </div>
-                </section>
-            {{/foreach}}
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
-    {{/if}}
-    {{/get}}
-    {{/is}}
-    </div>
+    {{> post-slider}}
 
     <!-- Latest Posts -->
     <section class="py-8 px-4 md:px-8">
         <h2 class="text-2xl font-bold mb-6">Latest</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div id="post-feed" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {{#foreach posts}}
             <a href="{{url}}">
                 {{> post-card}}
@@ -68,9 +13,8 @@
             {{/foreach}}
         </div>
 
-        <!-- Load More Button -->
         <div class="mt-10 text-center">
-            <button class="px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition">Load More</button>
+            {{pagination}}
         </div>
     </section>
 
@@ -95,6 +39,63 @@
 
     {{> footer }}
 
-</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Find the elements
+            const postFeed = document.getElementById('post-feed');
+            const loadMoreLink = document.getElementById('load-more-link');
 
-</html>
+            // If there's no "load more" link (e.g., last page), do nothing
+            if (!loadMoreLink) {
+                return;
+            }
+
+            // Add a click event listener
+            loadMoreLink.addEventListener('click', async function (e) {
+                // Prevent the link from navigating normally
+                e.preventDefault();
+
+                // Get the URL of the next page from the link's href
+                let nextPageUrl = loadMoreLink.href;
+
+                // Show a loading state
+                loadMoreLink.innerText = 'Loading...';
+                loadMoreLink.style.pointerEvents = 'none';
+
+                try {
+                    // Fetch the HTML of the next page
+                    const response = await fetch(nextPageUrl);
+                    const text = await response.text();
+
+                    // Use DOMParser to convert the text into an HTML document
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+
+                    // Find the new posts on the fetched page
+                    const newPosts = doc.querySelectorAll('#post-feed > a');
+
+                    // Append each new post to the current grid
+                    newPosts.forEach(post => {
+                        postFeed.appendChild(post);
+                    });
+
+                    // Find the "load more" link on the *fetched* page
+                    const newLoadMoreLink = doc.getElementById('load-more-link');
+
+                    if (newLoadMoreLink) {
+                        // If a new link exists, update the current one's URL
+                        loadMoreLink.href = newLoadMoreLink.href;
+                        loadMoreLink.innerText = 'Load More'; // Reset text
+                        loadMoreLink.style.pointerEvents = 'auto';
+                    } else {
+                        // If no new link exists, we've reached the end.
+                        loadMoreLink.remove(); // Remove the button
+                    }
+                } catch (error) {
+                    console.error('Error fetching new posts:', error);
+                    loadMoreLink.innerText = 'Error - Retry?'; // Show an error
+                    loadMoreLink.style.pointerEvents = 'auto';
+                }
+            });
+        });
+    </script>

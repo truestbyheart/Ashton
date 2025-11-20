@@ -1,7 +1,7 @@
-<article class="group rounded-xl overflow-hidden shadow-md hover:shadow-lg transition">
+<article class="group rounded-xl overflow-hidden transition">
     <div class="relative">
         <img src="{{feature_image}}" alt="{{title}}"
-            class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+            class="w-full rounded-2xl h-48 object-cover group-hover:scale-105 transition-transform duration-300">
         {{#if tags}}
         <div class="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded capitalize">
             {{#foreach tags limit="1"}}{{name}}{{/foreach}}
@@ -18,7 +18,7 @@
         </div>
         {{/if}}
     </div>
-    <div class="p-4">
+    <div class="py-4">
         <h3 class="font-semibold text-lg line-clamp-2">{{title}}</h3>
         <div class="text-sm text-gray-500 mt-2">
             {{primary_author.name}} • {{date published_at format="MMM D, YYYY"}}
