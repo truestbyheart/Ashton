@@ -1,0 +1,10 @@
+{{#is "page"}}{{/is}}
+{{!< default}}
+{{#post}}
+<main class="container max-w-3xl mx-auto my-8 px-4">
+    <h1 class="text-3xl font-bold mb-4">{{title}}</h1>
+    <article class="post-content {{post_class}}">
+        {{{content}}}
+    </article>
+</main>
+{{/post}}

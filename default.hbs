@@ -14,7 +14,15 @@
 </head>
 
 <body class="font-sans bg-white text-gray-800">
-    {{{body}}}
+    {{> navigation}}
+    <!-- Hero Post Banner -->
+    {{> post-slider}}
+    <div class="container mx-auto my-8 px-4">
+        {{{body}}}
+    </div>
+    {{> newsletter}}
+
+    {{> footer }}
 
     <!-- Jquery -->
     <script src="{{asset 'vendors/js/jquery-3.7.1.min.js'}}"></script>
@@ -25,7 +33,19 @@
             tocSelector: '.toc-list',
             contentSelector: '.post-content',
             headingSelector: 'h1, h2, h3, h4, h5, h6',
-            collapseDepth: 6
+            collapseDepth: 6,
+            scrollSmooth: true,
+            scrollSmoothDuration: 420,
+            scrollSmoothOffset: -100,
+            listClass: 'toc-list',
+            isCollapsedClass: 'is-collapsed',
+            collapsibleClass: 'is-collapsible',
+            activeListItemClass: 'is-active-li',
+            listItemClass: 'toc-list-item',
+            linkClass: 'toc-link',
+            activeLinkClass: 'is-active-link',
+            listItemHasChildrenClass: 'has-children',
+            tocActiveListItemClass: 'is-active-li'
         });
     </script>
 

@@ -1,5 +1,5 @@
-<div class="w-full h-182 rounded-2xl mx-auto mt-8 px-4 lg:block md:hidden max-sm:hidden">
-    {{^is "paged"}}
+{{#is "home"}}
+<div class="container w-full h-182 rounded-2xl mx-auto mt-8 px-4 lg:block md:hidden max-sm:hidden">
     {{#get "posts" limit="4" filter="featured:true" include="tags,authors"}} {{! Fetch up to 4 featured posts }}
     {{#if posts}}
     <div class="swiper">
@@ -43,5 +43,5 @@
     </div>
     {{/if}}
     {{/get}}
-    {{/is}}
 </div>
+{{/is}}

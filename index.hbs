@@ -1,9 +1,6 @@
-{{!< default}} {{> navigation }}
-    <!-- Hero Post Banner -->
-    {{> post-slider}}
-
+{{!< default}}
     <!-- Latest Posts -->
-    <section class="py-8 px-4 md:px-8">
+    <section>
         <h2 class="text-2xl font-bold mb-6">Latest</h2>
         <div id="post-feed" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {{#foreach posts}}
@@ -19,7 +16,7 @@
     </section>
 
     <!-- Our Authors -->
-    <section class="py-8 px-4 md:px-8">
+    <section>
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold">Our Authors</h2>
             <a href="/authors" class="px-4 py-2 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition">All
@@ -34,10 +31,6 @@
             {{/get}}
         </div>
     </section>
-
-    {{> newsletter}}
-
-    {{> footer }}
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

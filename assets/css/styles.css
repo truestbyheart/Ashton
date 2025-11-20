@@ -53,28 +53,169 @@
   object-fit: cover;
 }
 
-/* A little extra style for the post content if not using @tailwindcss/typography */
+/* Optimized Post Content Styling - Blog Standards */
+.post-content {
+  @apply max-w-3xl mx-auto;
+}
+
+/* Headings */
+.post-content h1 {
+  @apply text-4xl md:text-5xl font-bold text-gray-900 mt-12 mb-6 leading-tight;
+}
+
+.post-content h2 {
+  @apply text-3xl md:text-4xl font-bold text-gray-900 mt-12 mb-4 leading-tight border-b-2 border-gray-200 pb-3;
+}
+
 .post-content h3 {
-  @apply text-2xl font-bold mt-10 mb-4;
+  @apply text-2xl md:text-3xl font-bold text-gray-900 mt-10 mb-4 leading-snug;
 }
+
+.post-content h4 {
+  @apply text-xl md:text-2xl font-bold text-gray-800 mt-8 mb-3;
+}
+
+.post-content h5 {
+  @apply text-lg md:text-xl font-bold text-gray-800 mt-6 mb-2;
+}
+
+.post-content h6 {
+  @apply text-base md:text-lg font-bold text-gray-700 mt-4 mb-2 uppercase tracking-wide;
+}
+
+/* Paragraphs */
 .post-content p {
-  @apply mb-6;
+  @apply mb-6 text-base md:text-lg text-gray-700 leading-relaxed;
 }
+
+.post-content p:first-of-type {
+  @apply text-lg md:text-xl leading-relaxed text-gray-800 font-medium;
+}
+
+/* Links */
+.post-content a {
+  @apply text-blue-600 hover:text-blue-800 underline transition-colors font-medium;
+}
+
+.post-content a:visited {
+  @apply text-purple-600;
+}
+
+/* Lists */
+.post-content ul,
+.post-content ol {
+  @apply mb-6 pl-6 md:pl-8;
+}
+
+.post-content li {
+  @apply mb-2 text-gray-700 text-base md:text-lg leading-relaxed;
+}
+
+.post-content ul li {
+  @apply list-disc;
+}
+
+.post-content ol li {
+  @apply list-decimal;
+}
+
+.post-content ul ul,
+.post-content ul ol,
+.post-content ol ul,
+.post-content ol ol {
+  @apply mb-2 mt-2;
+}
+
+/* Blockquotes */
 .post-content blockquote {
-  @apply my-10 border-l-4 border-gray-800 pl-6 italic text-2xl font-serif text-gray-900;
+  @apply my-8 border-l-4 border-blue-500 pl-6 py-2 italic text-lg md:text-xl font-serif text-gray-800 bg-gray-50 pr-4 rounded-r-sm;
 }
+
+.post-content blockquote p {
+  @apply mb-0;
+}
+
 .post-content blockquote cite {
-  @apply block not-italic text-base text-gray-600 mt-2;
+  @apply block not-italic text-base text-gray-600 mt-3 font-sans;
 }
 
-/* Table of Contents Styles */
-.toc .toc-list li {
-  @apply text-black font-light mb-2;
+.post-content blockquote cite::before {
+  @apply content-['—'] mr-2;
 }
 
-.toc-list .is-active-link::before {
-  @apply bg-black;
+/* Code */
+.post-content code {
+  @apply bg-gray-100 text-red-600 px-2 py-1 rounded font-mono text-sm;
 }
+
+.post-content pre {
+  @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-6 font-mono text-sm leading-relaxed;
+}
+
+.post-content pre code {
+  @apply bg-transparent text-gray-100 p-0 rounded-none;
+}
+
+/* Images */
+.post-content img {
+  @apply max-w-full h-auto rounded-lg shadow-md my-8 mx-auto;
+}
+
+.post-content figure {
+  @apply my-8 text-center;
+}
+
+.post-content figcaption {
+  @apply text-sm text-gray-600 mt-2 italic;
+}
+
+/* Horizontal Rule */
+.post-content hr {
+  @apply my-12 border-t-2 border-gray-300;
+}
+
+/* Tables */
+.post-content table {
+  @apply w-full my-6 border-collapse;
+}
+
+.post-content thead {
+  @apply bg-gray-100;
+}
+
+.post-content th {
+  @apply border border-gray-300 px-4 py-2 text-left font-bold text-gray-900;
+}
+
+.post-content td {
+  @apply border border-gray-300 px-4 py-2 text-gray-700;
+}
+
+.post-content tbody tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+/* Emphasized Text */
+.post-content strong,
+.post-content b {
+  @apply font-bold text-gray-900;
+}
+
+.post-content em,
+.post-content i {
+  @apply italic;
+}
+
+.post-content mark {
+  @apply bg-yellow-200 px-1 rounded;
+}
+
+/* Footnotes & Small Text */
+.post-content small,
+.post-content .footnote {
+  @apply text-sm text-gray-600;
+}
+
 
 /*navigation menu styles */
 .swiper-button-next,
@@ -150,9 +291,15 @@
 
 /* Social Links */
 .social-links {
-  @apply flex items-center gap-2;
+  @apply inline-flex items-center justify-center;
 }
 
 .social-links svg {
-  @apply w-8 h-8;
+  @apply w-6 h-6 text-gray-500 transition-colors;
 }
+
+.social-links:hover svg {
+  @apply text-gray-800;
+}
+
+/* post content design */
