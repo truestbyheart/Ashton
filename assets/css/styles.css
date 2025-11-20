@@ -147,3 +147,12 @@
 .kg-bookmark-thumbnail {
   @apply w-32 h-32 shrink-0 object-cover bg-gray-100;
 }
+
+/* Social Links */
+.social-links {
+  @apply flex items-center gap-2;
+}
+
+.social-links svg {
+  @apply w-8 h-8;
+}
